@@ -35,6 +35,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "geckodriver": "^1.19.0",
     "lint-staged": "^9.4.2",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-quasar": "^1.0.0",
