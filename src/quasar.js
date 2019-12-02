@@ -24,7 +24,12 @@ import {
   QTr,
   QTd,
   QBtnGroup,
-  QDialog
+  QDialog,
+  QCard,
+  QCardSection,
+  QCardActions,
+  QInput,
+  QRadio
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -49,7 +54,12 @@ Vue.use(Quasar, {
     QTr,
     QTd,
     QBtnGroup,
-    QDialog
+    QDialog,
+    QCard,
+    QCardSection,
+    QCardActions,
+    QInput,
+    QRadio
   },
   directives: {
   },

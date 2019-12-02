@@ -12,18 +12,15 @@
       </div>
     </div>
     <ProductTable/>
-    <ButtonGroup/>
   </q-layout>
 </template>
 
 <script>
 import ProductTable from '@/components/ProductTable'
-import ButtonGroup from '@/components/ButtonGroup'
 
 export default {
   components: {
-    ProductTable,
-    ButtonGroup
+    ProductTable
   }
 }
 </script>
