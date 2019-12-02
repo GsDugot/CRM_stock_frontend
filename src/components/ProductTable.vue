@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
+      id="ProductsTable"
       class="my-sticky-virtscroll-table shadow-9"
       title="Treats"
       :data="products"
@@ -13,6 +14,18 @@
       no-data-label="No items available"
       no-results-label="No items found"
     >
+      <template v-slot:top-right>
+        <q-input
+          standout="bg-cyan-7"
+          debounce="300"
+          v-model="filter"
+          placeholder="Search"
+          class="no-shadow">
+          <template v-slot:append>
+            <q-icon name="search" @click="getProductByCode(filter)" />
+          </template>
+        </q-input>
+      </template>
       <q-tr slot="body" slot-scope="props" :props="props">
         <q-td key="code" :props="props">
           {{ props.row.code }}
@@ -23,14 +36,11 @@
          <q-td key="stock" :props="props">
           {{ props.row.stock }}
         </q-td>
-         <q-td key="unit" :props="props">
-          {{ props.row.unit }}
-        </q-td>
         <q-td key="editButton" :props="props">
           <template>
             <q-btn
               round
-              color="deep-orange"
+              color="orange-5"
               icon="create"
               @click="openProductEditForm(props.row)"
             >
@@ -41,7 +51,7 @@
          <q-td key="deleteButton" :props="props">
           <q-btn
             round
-            color="deep-orange"
+            color="orange-5"
             icon="delete"
             @click="deleteDialog = true"/>
             <q-dialog v-model="deleteDialog">
@@ -81,10 +91,10 @@ export default {
   data () {
     return {
       products: [],
-      showProductRegistrationForm: false,
       showProductEditForm: false,
       deleteDialog: false,
-      productId: '',
+      filter: '',
+      productCode: '',
       pagination: {
         rowsPerPage: 10
       },
@@ -110,13 +120,6 @@ export default {
           field: 'stock'
         },
         {
-          name: 'unit',
-          align: 'center',
-          label: 'Unit',
-          field: 'unit',
-          sortable: true
-        },
-        {
           name: 'editButton',
           align: 'center',
           label: 'Edit',
@@ -140,9 +143,6 @@ export default {
     })
   },
   methods: {
-    openProductRegistrationForm () {
-      this.showProductRegistrationForm = true
-    },
     openProductEditForm (data) {
       this.showProductEditForm = true
       EventBus.$emit('openProductEditForm', data)
@@ -153,13 +153,22 @@ export default {
       })
     },
     deleteProduct (product) {
-      this.productId = product._id
-      console.log(product)
-      axios.delete(apiURL + '/product-management/products/' + this.productId)
+      this.productCode = product.code
+      axios.delete(apiURL + '/product-management/products/' + this.productCode)
         .then(response => {
-          console.log(response)
+          console.log(this.productId)
           this.deleteDialog = false
           this.getProducts()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getProductByCode (code) {
+      axios.get(apiURL + '/product-management/products/' + code)
+        .then(response => {
+          console.log(response)
+          this.products = response.data
         })
         .catch(error => {
           console.log(error)
@@ -178,7 +187,7 @@ export default {
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th
-    background-color: #a8fc53
+    background-color: #82ffff
 
   thead tr:first-child th
     position: sticky

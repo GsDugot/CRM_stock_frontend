@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      productId: '',
+      productCode: '',
       productData: {
         name: '',
         stock: ''
@@ -57,12 +57,12 @@ export default {
   created () {
     EventBus.$on('openProductEditForm', product => {
       this.productData = Object.assign({}, product)
-      this.productId = product._id
+      this.productCode = product.code
     })
   },
   methods: {
     editProduct () {
-      axios.put(apiURL + '/product-management/products/' + this.productId, {
+      axios.put(apiURL + '/product-management/products/' + this.productCode, {
         name: this.productData.name,
         stock: this.productData.stock
       })
