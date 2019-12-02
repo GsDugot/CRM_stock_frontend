@@ -42,7 +42,19 @@
           <q-btn
             round
             color="deep-orange"
-            icon="delete"/>
+            icon="delete"
+            @click="deleteDialog = true"/>
+            <q-dialog v-model="deleteDialog">
+              <q-card  flat bordered style="width: 300px; max-width: 60vw;">
+                <q-card-section>
+                  <div class="text-6">Delete this product?</div>
+                </q-card-section>
+                <q-card-actions align="right" class="text-primary">
+                  <q-btn flat label="Cancel" @click="deleteDialog = false" />
+                  <q-btn flat label="Delete" @click="deleteProduct(props.row)" />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
         </q-td>
       </q-tr>
     </q-table>
@@ -71,6 +83,8 @@ export default {
       products: [],
       showProductRegistrationForm: false,
       showProductEditForm: false,
+      deleteDialog: false,
+      productId: '',
       pagination: {
         rowsPerPage: 10
       },
@@ -137,6 +151,19 @@ export default {
       axios.get(apiURL + '/product-management/products').then(response => {
         this.products = response.data
       })
+    },
+    deleteProduct (product) {
+      this.productId = product._id
+      console.log(product)
+      axios.delete(apiURL + '/product-management/products/' + this.productId)
+        .then(response => {
+          console.log(response)
+          this.deleteDialog = false
+          this.getProducts()
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
