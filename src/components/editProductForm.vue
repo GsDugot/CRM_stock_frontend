@@ -28,7 +28,7 @@
 
 <script>
 import { EventBus } from '../main'
-import { apiURL } from '@/data.js'
+import data from '@/config.json'
 import axios from 'axios'
 
 export default {
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     editProduct () {
-      axios.put(apiURL + '/product-management/products/' + this.productCode, {
+      axios.put(data.path.apiURL + data.path.productPath + '/' + this.productCode, {
         name: this.productData.name,
         stock: this.productData.stock
       })

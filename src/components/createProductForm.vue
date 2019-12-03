@@ -27,7 +27,7 @@
 
 <script>
 import { EventBus } from '../main'
-import { apiURL } from '@/data.js'
+import data from '@/config.json'
 import axios from 'axios'
 
 export default {
@@ -48,7 +48,7 @@ export default {
         stock: this.productData.stock,
         unit: this.productData.unit
       }
-      axios.post(apiURL + '/product-management/products', newProduct)
+      axios.post(data.path.apiURL + data.path.productPath, newProduct)
         .then(response => {
           console.log(response)
           EventBus.$emit('refreshTable', 'getProducts')

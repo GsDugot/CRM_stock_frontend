@@ -53,15 +53,15 @@
             round
             color="orange-5"
             icon="delete"
-            @click="deleteDialog = true"/>
-            <q-dialog v-model="deleteDialog">
+            @click="deleteDialog = true; productRow = props.row"/>
+            <q-dialog v-model="deleteDialog" :props="props">
               <q-card  flat bordered style="width: 300px; max-width: 60vw;">
                 <q-card-section>
                   <div class="text-6">Delete this product?</div>
                 </q-card-section>
                 <q-card-actions align="right" class="text-primary">
                   <q-btn flat label="Cancel" @click="deleteDialog = false" />
-                  <q-btn flat label="Delete" @click="deleteProduct(props.row)" />
+                  <q-btn flat label="Delete" @click="deleteProduct(productRow)" />
                 </q-card-actions>
               </q-card>
             </q-dialog>
@@ -79,7 +79,7 @@
 <script>
 import { EventBus } from '../main'
 import axios from 'axios'
-import { apiURL } from '@/data.js'
+import data from '@/config.json'
 import createProductForm from './createProductForm'
 import editProductForm from './editProductForm'
 
@@ -95,6 +95,7 @@ export default {
       deleteDialog: false,
       filter: '',
       productCode: '',
+      productRow: {},
       pagination: {
         rowsPerPage: 10
       },
@@ -148,15 +149,16 @@ export default {
       EventBus.$emit('openProductEditForm', data)
     },
     getProducts () {
-      axios.get(apiURL + '/product-management/products').then(response => {
+      axios.get(data.path.apiURL + data.path.productPath).then(response => {
         this.products = response.data
+        console.log(response)
       })
     },
     deleteProduct (product) {
       this.productCode = product.code
-      axios.delete(apiURL + '/product-management/products/' + this.productCode)
+      axios.delete(data.path.apiURL + data.path.productPath + '/' + this.productCode)
         .then(response => {
-          console.log(this.productId)
+          console.log(this.productCode)
           this.deleteDialog = false
           this.getProducts()
         })
@@ -165,10 +167,14 @@ export default {
         })
     },
     getProductByCode (code) {
-      axios.get(apiURL + '/product-management/products/' + code)
+      axios.get(data.path.apiURL + data.path.productPath + '/' + code)
         .then(response => {
           console.log(response)
-          this.products = response.data
+          if (code === '') {
+            this.getProducts()
+          } else {
+            this.products = [response.data]
+          }
         })
         .catch(error => {
           console.log(error)
@@ -187,7 +193,7 @@ export default {
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th
-    background-color: #82ffff
+    background-color: #81e0e6
 
   thead tr:first-child th
     position: sticky
