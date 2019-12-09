@@ -45,7 +45,6 @@
               @click="openProductEditForm(props.row)"
             >
             </q-btn>
-            <editProductForm v-model="showProductEditForm"/>
           </template>
         </q-td>
          <q-td key="deleteButton" :props="props">
@@ -62,6 +61,7 @@
         <createProductForm />
       </div>
     </div>
+    <editProductForm v-model="showProductEditForm"/>
     <q-dialog v-model="showDelete">
       <q-card  flat bordered style="width: 300px; max-width: 60vw;">
         <q-card-section>
