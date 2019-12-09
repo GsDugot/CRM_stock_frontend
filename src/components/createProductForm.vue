@@ -13,8 +13,8 @@
         </q-card-section>
         <q-card-section>
           <q-input v-model="productData.name" label="Product name"></q-input>
-          <q-radio v-model="productData.unit" label="Unit" val="true"></q-radio>
-          <q-radio v-model="productData.unit" label="Package" val="false"></q-radio>
+          <q-radio v-model="productData.unit" label="Unit" :val="true"></q-radio>
+          <q-radio v-model="productData.unit" label="Package" :val="false"></q-radio>
         </q-card-section>
         <q-card-actions align="right" class="text-primary">
           <q-btn flat label="Close" @click="dialog = false" />
@@ -27,8 +27,7 @@
 
 <script>
 import { EventBus } from '../main'
-import data from '@/config.json'
-import axios from 'axios'
+import productService from '@/services/product.service.js'
 
 export default {
   data () {
@@ -48,7 +47,8 @@ export default {
         stock: this.productData.stock,
         unit: this.productData.unit
       }
-      axios.post(data.path.apiURL + data.path.productPath, newProduct)
+      console.log(newProduct.unit)
+      productService.createProduct(newProduct)
         .then(response => {
           console.log(response)
           EventBus.$emit('refreshTable', 'getProducts')

@@ -53,18 +53,7 @@
             round
             color="orange-5"
             icon="delete"
-            @click="deleteDialog = true; productRow = props.row"/>
-            <q-dialog v-model="deleteDialog" :props="props">
-              <q-card  flat bordered style="width: 300px; max-width: 60vw;">
-                <q-card-section>
-                  <div class="text-6">Delete this product?</div>
-                </q-card-section>
-                <q-card-actions align="right" class="text-primary">
-                  <q-btn flat label="Cancel" @click="deleteDialog = false" />
-                  <q-btn flat label="Delete" @click="deleteProduct(productRow)" />
-                </q-card-actions>
-              </q-card>
-            </q-dialog>
+            @click="showDeleteDialog(props.row)"/>
         </q-td>
       </q-tr>
     </q-table>
@@ -73,15 +62,25 @@
         <createProductForm />
       </div>
     </div>
+    <q-dialog v-model="showDelete">
+      <q-card  flat bordered style="width: 300px; max-width: 60vw;">
+        <q-card-section>
+          <div class="text-6">Delete this product?</div>
+        </q-card-section>
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancel" @click="showDelete = false" />
+          <q-btn flat label="Delete" @click="deleteProduct()" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script>
 import { EventBus } from '../main'
-import axios from 'axios'
-import data from '@/config.json'
 import createProductForm from './createProductForm'
 import editProductForm from './editProductForm'
+import productService from '@/services/product.service.js'
 
 export default {
   components: {
@@ -92,7 +91,8 @@ export default {
     return {
       products: [],
       showProductEditForm: false,
-      deleteDialog: false,
+      showDelete: false,
+      selectedProduct: {},
       filter: '',
       productCode: '',
       productRow: {},
@@ -136,11 +136,11 @@ export default {
     }
   },
   mounted () {
-    this.getProducts()
+    this.listProducts()
   },
   created () {
     EventBus.$on('refreshTable', data => {
-      this.getProducts()
+      this.listProducts()
     })
   },
   methods: {
@@ -148,30 +148,34 @@ export default {
       this.showProductEditForm = true
       EventBus.$emit('openProductEditForm', data)
     },
-    getProducts () {
-      axios.get(data.path.apiURL + data.path.productPath).then(response => {
-        this.products = response.data
-        console.log(response)
-      })
+    listProducts () {
+      productService.getProducts()
+        .then(response => {
+          this.products = response.data
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error) // toast
+        })
     },
-    deleteProduct (product) {
-      this.productCode = product.code
-      axios.delete(data.path.apiURL + data.path.productPath + '/' + this.productCode)
+    deleteProduct () {
+      this.productCode = this.selectedProduct.code
+      productService.deleteProduct(this.productCode)
         .then(response => {
           console.log(this.productCode)
-          this.deleteDialog = false
-          this.getProducts()
+          this.showDelete = false
+          this.listProducts()
         })
         .catch(error => {
           console.log(error)
         })
     },
     getProductByCode (code) {
-      axios.get(data.path.apiURL + data.path.productPath + '/' + code)
+      productService.getProductByCode(code)
         .then(response => {
           console.log(response)
           if (code === '') {
-            this.getProducts()
+            this.listProducts()
           } else {
             this.products = [response.data]
           }
@@ -179,6 +183,10 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    showDeleteDialog (product) {
+      this.showDelete = true
+      this.selectedProduct = product
     }
   }
 }
