@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="show" width="80">
-    <q-card flat bordered style="width: 700px; max-width: 80vw;">
+    <q-card flat bordered class="edit-product-form">
       <q-card-section>
         <div class="text-6">Edition of Products</div>
       </q-card-section>
@@ -82,5 +82,10 @@ export default {
 </script>
 
 <style>
+
+.edit-product-form {
+  width: 700px;
+  max-width: 80vw;
+}
 
 </style>

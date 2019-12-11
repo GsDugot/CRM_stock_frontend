@@ -63,7 +63,7 @@
     </div>
     <editProductForm v-model="showProductEditForm"/>
     <q-dialog v-model="showDelete">
-      <q-card  flat bordered style="width: 300px; max-width: 60vw;">
+      <q-card flat bordered class="delete-card">
         <q-card-section>
           <div class="text-6">Delete this product?</div>
         </q-card-section>
@@ -208,4 +208,14 @@ export default {
     top: 0
     opacity: 1
     z-index: 1
+
+</style>
+
+<style scoped>
+
+.delete-card {
+  width: 300px;
+  max-width: 60vw;
+}
+
 </style>

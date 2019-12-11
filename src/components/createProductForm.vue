@@ -6,8 +6,8 @@
       label="CreateProduct"
       @click="dialog = true"
       />
-    <q-dialog v-model="dialog" width="80">
-      <q-card flat bordered style="width: 700px; max-width: 80vw;">
+    <q-dialog v-model="dialog" width="70">
+      <q-card flat bordered class="register-product-form">
         <q-card-section>
           <div class="text-6">Product Registry</div>
         </q-card-section>
@@ -61,6 +61,11 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style scoped>
+
+.register-product-form {
+  width: 700px;
+  max-width: 80vw;
+}
 
 </style>
