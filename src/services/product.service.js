@@ -9,11 +9,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post(URL + resourceURL, object)
         .then(response => {
-          console.log('Promesa de creacion recibida')
           resolve(response)
         })
         .catch(error => {
-          console.log('Promesa de creacion fallida')
           reject(error)
         })
     })
@@ -22,11 +20,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(URL + resourceURL)
         .then(response => {
-          console.log('Promesa de obtencion recibida')
           resolve(response)
         })
         .catch(error => {
-          console.log('Promesa de obtencion fallida')
           reject(error)
         })
     })
@@ -35,11 +31,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.delete(URL + resourceURL + '/' + productCode)
         .then(response => {
-          console.log('Promesa de eliminacion recibida')
           resolve(response)
         })
         .catch(error => {
-          console.log('Promesa de eliminacion fallida')
           reject(error)
         })
     })
@@ -48,11 +42,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(URL + resourceURL + '/' + productCode)
         .then(response => {
-          console.log('Promesa de obtencion unica recibida')
           resolve(response)
         })
         .catch(error => {
-          console.log('Promesa de obtencion unica fallida')
           reject(error)
         })
     })
@@ -61,11 +53,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.put(URL + resourceURL + '/' + productCode)
         .then(response => {
-          console.log('Promesa de edicion recibida')
           resolve(response)
         })
         .catch(error => {
-          console.log('Promesa de edicion fallida')
           reject(error)
         })
     })

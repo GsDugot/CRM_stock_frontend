@@ -2,24 +2,24 @@
   <q-dialog v-model="show" width="80">
     <q-card flat bordered class="edit-product-form">
       <q-card-section>
-        <div class="text-6">Edition of Products</div>
+        <div class="text-6">Actualizar datos del producto</div>
       </q-card-section>
       <q-card-section>
         <q-input
           v-model="productData.name"
-          label="Product name"
+          label="Nombre del producto"
           clearable
-        :rules="[val => !!val || 'Field is required']"
+          :rules="[val => !!val || 'El campo es requerido']"
         />
         <q-input
           v-model="productData.stock"
           label="Stock"
           clearable
-          :rules="[val => !!val || 'Field is required']"></q-input>
+          :rules="[val => !!val || 'El campo es requerido']"></q-input>
       </q-card-section>
       <q-card-actions align="right" class="text-primary">
-        <q-btn flat label="Close" @click="closeForm()" />
-        <q-btn flat label="Update" @click="editProduct()" />
+        <q-btn flat label="CANCELAR" @click="closeForm()" />
+        <q-btn flat label="ACTUALIZAR" @click="editProduct()" />
       </q-card-actions>
     </q-card>
   </q-dialog>

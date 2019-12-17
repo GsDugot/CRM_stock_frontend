@@ -4,9 +4,10 @@ import data from '@/config.json'
 export default {
   init () {
     axios.interceptors.response.use(function (response) {
-      console.log('Response has finished correctly')
+      // Any status code that lie within the range of 2xx cause this function to trigger
       return response
     }, function (error) {
+      // Any status codes that falls outside the range of 2xx cause this function to trigger
       switch (error.response.status) {
         case 401:
           // interceptar 401: redireccionar al login
@@ -21,7 +22,7 @@ export default {
           console.log('Tiempo de espera de la solicitud agotado, vuelva a enviar su solicitud más tarde.')
           break
         default:
-          console.log('Ha ocurrido un problema, por favor intentelo nevamente en unos momentos.')
+          alert('Ha ocurrido un problema, por favor intentelo nuevamente en unos momentos.')
           break
       }
       return Promise.reject(error)

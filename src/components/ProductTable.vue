@@ -3,7 +3,7 @@
     <q-table
       id="ProductsTable"
       class="my-sticky-virtscroll-table shadow-9"
-      title="Treats"
+      title="Productos"
       :data="products"
       :columns="columns"
       table-style="max-height: 400px"
@@ -11,15 +11,15 @@
       virtual-scroll
       :pagination.sync="pagination"
       :rows-per-page-options="[0]"
-      no-data-label="No items available"
-      no-results-label="No items found"
+      no-data-label="No hay productos disponibles"
+      no-results-label="No se ha encontrado el producto"
     >
       <template v-slot:top-right>
         <q-input
           standout="bg-cyan-7"
           debounce="300"
           v-model="filter"
-          placeholder="Search"
+          placeholder="Buscar"
           class="no-shadow"
         >
           <template v-slot:append>
@@ -50,11 +50,11 @@
     <q-dialog v-model="showDelete">
       <q-card flat bordered class="delete-card">
         <q-card-section>
-          <div class="text-6">Delete this product?</div>
+          <div class="text-6">¿Esta seguro que desea eliminar este producto?</div>
         </q-card-section>
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" @click="showDelete = false" />
-          <q-btn flat label="Delete" @click="deleteProduct()" />
+          <q-btn flat label="CANCELAR" @click="showDelete = false" />
+          <q-btn flat label="ELIMINAR" @click="deleteProduct()" />
         </q-card-actions>
       </q-card>
     </q-dialog>
