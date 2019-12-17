@@ -72,7 +72,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
-          alert('No se ha podido editar los datos del producto correctamente. Por favor vuelva a intentarlo en unos momentos.')
+          // console.log('No se ha podido editar los datos del producto correctamente. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     closeForm () {

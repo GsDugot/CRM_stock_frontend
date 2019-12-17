@@ -1,7 +1,7 @@
 {
   "path": {
-    "apiURL": "http://localhost:8090/",
-    "productPath": "/product-management/products"
+    "apiURL": "http://localhost:3000/",
+    "productPath": "product-management/products"
   },
   "login": {
     "URL" : "http://localhost:8080/"

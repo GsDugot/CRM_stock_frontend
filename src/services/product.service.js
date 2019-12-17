@@ -2,7 +2,7 @@ import axios from 'axios'
 import data from '@/config.json'
 
 const URL = data.path.apiURL
-const resourceURL = '/product-management/products'
+const resourceURL = data.path.productPath
 
 export default {
   createProduct (object) {

@@ -47,7 +47,6 @@ export default {
           stock: this.productData.stock,
           unit: this.productData.unit
         }
-        console.log(newProduct.unit)
         productService
           .createProduct(newProduct)
           .then(response => {
@@ -56,9 +55,7 @@ export default {
           })
           .catch(error => {
             console.log(error)
-            alert(
-              'No se ha podido crear correctamente el producto. Por favor vuelva a intentarlo en unos momentos.'
-            )
+            // alert('No se ha podido crear correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
           })
       }
     }
