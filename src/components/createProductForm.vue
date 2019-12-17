@@ -55,6 +55,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          alert('No se ha podido crear correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
         })
     }
   }

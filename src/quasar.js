@@ -29,7 +29,8 @@ import {
   QCardSection,
   QCardActions,
   QInput,
-  QRadio
+  QRadio,
+  Notify
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -59,7 +60,8 @@ Vue.use(Quasar, {
     QCardSection,
     QCardActions,
     QInput,
-    QRadio
+    QRadio,
+    Notify
   },
   directives: {
   },

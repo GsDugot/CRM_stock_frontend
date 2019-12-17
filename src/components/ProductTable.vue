@@ -20,39 +20,24 @@
           debounce="300"
           v-model="filter"
           placeholder="Search"
-          class="no-shadow">
+          class="no-shadow"
+        >
           <template v-slot:append>
             <q-icon name="search" @click="getProductByCode(filter)" />
           </template>
         </q-input>
       </template>
       <q-tr slot="body" slot-scope="props" :props="props">
-        <q-td key="code" :props="props">
-          {{ props.row.code }}
-        </q-td>
-         <q-td key="product" :props="props">
-          {{ props.row.name }}
-        </q-td>
-         <q-td key="stock" :props="props">
-          {{ props.row.stock }}
-        </q-td>
+        <q-td key="code" :props="props">{{ props.row.code }}</q-td>
+        <q-td key="product" :props="props">{{ props.row.name }}</q-td>
+        <q-td key="stock" :props="props">{{ props.row.stock }}</q-td>
         <q-td key="editButton" :props="props">
           <template>
-            <q-btn
-              round
-              color="orange-5"
-              icon="create"
-              @click="openProductEditForm(props.row)"
-            >
-            </q-btn>
+            <q-btn round color="orange-5" icon="create" @click="openProductEditForm(props.row)"></q-btn>
           </template>
         </q-td>
-         <q-td key="deleteButton" :props="props">
-          <q-btn
-            round
-            color="orange-5"
-            icon="delete"
-            @click="showDeleteDialog(props.row)"/>
+        <q-td key="deleteButton" :props="props">
+          <q-btn round color="orange-5" icon="delete" @click="showDeleteDialog(props.row)" />
         </q-td>
       </q-tr>
     </q-table>
@@ -61,7 +46,7 @@
         <createProductForm />
       </div>
     </div>
-    <editProductForm v-model="showProductEditForm"/>
+    <editProductForm v-model="showProductEditForm" />
     <q-dialog v-model="showDelete">
       <q-card flat bordered class="delete-card">
         <q-card-section>
@@ -155,7 +140,8 @@ export default {
           console.log(response)
         })
         .catch(error => {
-          console.log(error) // toast
+          console.log(error)
+          alert('No se ha podido obtener correctamente la lista de productos. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     deleteProduct () {
@@ -168,6 +154,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          alert('No se ha podido eliminar correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     getProductByCode (code) {
@@ -212,10 +199,8 @@ export default {
 </style>
 
 <style scoped>
-
 .delete-card {
   width: 300px;
   max-width: 60vw;
 }
-
 </style>
