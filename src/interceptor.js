@@ -10,15 +10,12 @@ export default {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       switch (error.response.status) {
         case 401:
-          // interceptar 401: redireccionar al login
           window.location.href = data.login.URL
           break
         case 500:
-          // 500: mostrar alerta
           alert('Ha sucedido algo inesperado, por favor ingresa a la página nuevamente en un momento.')
           break
         case 408:
-          // 408: mostrar timeout message
           console.log('Tiempo de espera de la solicitud agotado, vuelva a enviar su solicitud más tarde.')
           break
         default:
