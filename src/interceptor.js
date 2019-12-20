@@ -17,7 +17,7 @@ export default {
             alert('500: Ha sucedido algo inesperado en el servidor')
             break
           case 408:
-            console.log('408: Tiempo de espera de la solicitud agotado')
+            alert('408: Tiempo de espera de la solicitud agotado')
             break
           default:
             alert(error.response.status + ': Ha ocurrido un problema, por favor intentelo nuevamente en unos momentos')

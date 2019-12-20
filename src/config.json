@@ -1,9 +1,9 @@
 {
   "path": {
-    "apiURL": "http://localhost:8090/",
+    "apiURL": "http://localhost:7050/",
     "productPath": "crm-api/products"
   },
   "login": {
-    "URL" : "http://localhost:8080/"
+    "URL" : "http://localhost:7050/login"
   }
 }

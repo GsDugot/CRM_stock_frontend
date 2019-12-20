@@ -140,7 +140,7 @@ export default {
           console.log(response)
         })
         .catch(() => {
-          console.log('No se ha podido obtener correctamente la lista de productos. Por favor vuelva a intentarlo en unos momentos.')
+          alert('No se ha podido obtener correctamente la lista de productos. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     deleteProduct () {
@@ -151,7 +151,7 @@ export default {
           this.listProducts()
         })
         .catch(() => {
-          console.log('No se ha podido eliminar correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
+          alert('No se ha podido eliminar correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     getProductByCode (code) {

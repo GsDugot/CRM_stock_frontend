@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/products/',
   pluginOptions: {
     quasar: {
       treeShake: true
