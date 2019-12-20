@@ -139,8 +139,7 @@ export default {
           this.products = response.data
           console.log(response)
         })
-        .catch(error => {
-          console.log(error)
+        .catch(() => {
           console.log('No se ha podido obtener correctamente la lista de productos. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
@@ -148,19 +147,16 @@ export default {
       this.productCode = this.selectedProduct.code
       productService.deleteProduct(this.productCode)
         .then(response => {
-          console.log(this.productCode)
           this.showDelete = false
           this.listProducts()
         })
-        .catch(error => {
-          console.log(error)
+        .catch(() => {
           console.log('No se ha podido eliminar correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
         })
     },
     getProductByCode (code) {
       productService.getProductByCode(code)
         .then(response => {
-          console.log(response)
           if (code === '') {
             this.listProducts()
           } else {

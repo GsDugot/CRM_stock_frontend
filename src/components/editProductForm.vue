@@ -67,11 +67,11 @@ export default {
         stock: this.productData.stock
       })
         .then(response => {
+          console.log(response)
           EventBus.$emit('refreshTable', 'getProducts')
           this.$emit('input', false)
         })
-        .catch(error => {
-          console.log(error)
+        .catch(() => {
           console.log('No se ha podido editar los datos del producto correctamente. Por favor vuelva a intentarlo en unos momentos.')
         })
     },

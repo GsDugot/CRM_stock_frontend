@@ -53,8 +53,7 @@ export default {
             console.log(response)
             EventBus.$emit('refreshTable', 'getProducts')
           })
-          .catch(error => {
-            console.log(error)
+          .catch(() => {
             alert('No se ha podido crear correctamente el producto. Por favor vuelva a intentarlo en unos momentos.')
           })
       }

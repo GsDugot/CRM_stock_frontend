@@ -8,19 +8,21 @@ export default {
       return response
     }, function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
-      switch (error.response.status) {
-        case 401:
-          window.location.href = data.login.URL
-          break
-        case 500:
-          alert('Ha sucedido algo inesperado, por favor ingresa a la página nuevamente en un momento.')
-          break
-        case 408:
-          console.log('Tiempo de espera de la solicitud agotado, vuelva a enviar su solicitud más tarde.')
-          break
-        default:
-          alert('Ha ocurrido un problema, por favor intentelo nuevamente en unos momentos.')
-          break
+      if (error.response !== undefined) {
+        switch (error.response.status) {
+          case 401:
+            window.location.href = data.login.URL
+            break
+          case 500:
+            alert('500: Ha sucedido algo inesperado en el servidor')
+            break
+          case 408:
+            console.log('408: Tiempo de espera de la solicitud agotado')
+            break
+          default:
+            alert(error.response.status + ': Ha ocurrido un problema, por favor intentelo nuevamente en unos momentos')
+            break
+        }
       }
       return Promise.reject(error)
     })
